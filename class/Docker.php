@@ -1,0 +1,71 @@
+<?php
+
+class Docker{
+	var $id;
+	var $url;
+	var $confs;
+	var $imageid="90";
+	var $url_registry="localhost:5000/centos6haproxy";
+	private $bin="docker  ";
+	private $options=" -t -i ";
+	var $containerid;
+	public function start(){
+		var_dump($this->confs);
+		foreach($this->confs as $type => $conf){
+			$pathtoconf = $this->download_conf($conf[0],$type);
+			$stringconfs = " -v ". $pathtoconf.":".$conf[1]." ";
+		}
+		$cmd = $this->bin." run -d ".$stringconfs.$this->options.$this->imageid;
+		//echo $cmd."\n";
+		$this->pull();
+		
+		$this->containerid=system($cmd);	
+		
+	}
+	public function stop(){
+		$cmd = $this->bin." kill -9 ".$this->containerid;
+		system($cmd);
+	}
+	public function restart(){
+		$this->stop();
+		$this->start();
+	}
+	
+	private function pull(){
+		$cmd="docker pull ".$this->url_registry;
+		//echo "Pull => ".$cmd."\n";
+		return system($cmd);
+	}
+	private function download_conf($url,$type){
+		$ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL,$url);
+                curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, 0);
+                curl_setopt($ch, CURLOPT_VERBOSE, false);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch,CURLOPT_ENCODING, "");
+                curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
+                $content=curl_exec($ch);
+                $curl_info = curl_getinfo($ch);
+                curl_close($ch);
+		$dir="/tmp/";	
+		$file=$dir.$type.".conf";
+		$fp = fopen($file, 'w');
+		fwrite($fp, $content);
+		fclose($fp);
+		return $file;
+	}																				
+	function __construct($id,$imageid,$confs){
+		$this->id=$id;
+		$this->imageid=$imageid;
+		$this->confs=$confs;
+	}
+
+}
+
+
+
+
+
+
+?>
