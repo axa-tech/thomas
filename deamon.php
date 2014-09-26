@@ -18,7 +18,7 @@ $callback = function($msg){
   echo " [x] Done", "\n";
   $call=new CallPortail;
   $call->decode_message_create($msg->body);
-//  $msg->delivery_info['channel']->basic_ack($msg->delivery_info['delivery_tag']);
+  $msg->delivery_info['channel']->basic_ack($msg->delivery_info['delivery_tag']);
 };
 
 $channel->basic_qos(null, 1, null);
