@@ -5,36 +5,31 @@ class Docker{
 	var $url;
 	var $confs;
 	var $imageid="90";
-	var $url_registry="localhost:5000/centos6haproxy";
-	private $bin="docker  ";
-	private $options=" -t -i ";
-	var $containerid;
+	var $url_registry="http://10.226.0.135:5000/haproxy";
+	var $bin="docker -d ";
+	var $options=" -t -i ";
 	public function start(){
-		var_dump($this->confs);
 		foreach($this->confs as $type => $conf){
 			$pathtoconf = $this->download_conf($conf[0],$type);
-			$stringconfs = " -v ". $pathtoconf.":".$conf[1]." ";
+			$stringconfs .= " -v ". $pathtoconf.":".$conf[1]." ";
 		}
-		$cmd = $this->bin." run -d ".$stringconfs.$this->options.$this->imageid;
-		//echo $cmd."\n";
+		$cmd = $this->bin.$stringconfs.$this->options.$this->imageid." /bin/bash ";
+		echo "EXEC=> ".$cmd."\n";
 		$this->pull();
-		
-		$this->containerid=system($cmd);	
+		system($cmd);	
 		
 	}
 	public function stop(){
-		$cmd = $this->bin." kill -9 ".$this->containerid;
-		system($cmd);
+		//
 	}
 	public function restart(){
-		$this->stop();
-		$this->start();
+		$this->stop;
+		$this->start;
 	}
-	
 	private function pull(){
-		$cmd="docker pull ".$this->url_registry;
-		//echo "Pull => ".$cmd."\n";
-		return system($cmd);
+		$cmd="docker pull ".$this->url_registry."/".$this->imageid;
+		echo "Pull => ".$cmd."\n";
+		//system($cmd);
 	}
 	private function download_conf($url,$type){
 		$ch = curl_init();
@@ -54,11 +49,12 @@ class Docker{
 		fwrite($fp, $content);
 		fclose($fp);
 		return $file;
-	}																				
+	}
 	function __construct($id,$imageid,$confs){
 		$this->id=$id;
 		$this->imageid=$imageid;
 		$this->confs=$confs;
+
 	}
 
 }
