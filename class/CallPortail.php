@@ -51,7 +51,7 @@ class CallPortail{
                 return $tabjson;
         }
 	function setCookie(){
-		$this->cookie= "JSESSIONID=76658DDC6398FC556BF89459B0005273; path=/; domain=portal.axa-cloud.com; HttpOnly"	;
+		$this->cookie= "JSESSIONID=FCD040DC23677D6AFAEB2B9FB1ED10E8; path=/; domain=portal.axa-cloud.com; HttpOnly"	;
 	}
 	function getCookie(){
 		return  $this->cookie;
@@ -67,7 +67,7 @@ class CallPortail{
 	//	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch,CURLOPT_ENCODING, "");
-	//	curl_setopt($ch, CURLOPT_CUSTOMREQUEST,$method);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST,$method);
 		curl_setopt ($ch, CURLOPT_COOKIE, "$this->cookie" );
 	//	curl_setopt ($ch, CURLOPT_HEADER, 1);
 		if($type!=""){
@@ -134,10 +134,59 @@ class CallPortail{
 			$idApi=$vm->id;
 			$idVm=$return->providerId;
 			$this->updateVmInfos($bubbleid,$idVm,$idApi);
+			$this->sendUpdate($bubbleid,$idVm,$idApi);
         	}
 		return true;
 	}
-
+	private function sendUpdate($bubbleid,$idVm,$idApi,$flavor=false){
+		$callrabbit = new CallRabbit();
+		$message="{plateformId:$idApi,plateformRemoteId:$bubbleid,idVm:$idVm,flavor:$flavor,comment:update this vm}";//json
+		$callrabbit->send($message,"updateplateform");
+	}
+	public function decode_message_update($message){
+		$tab = json_decode($message);
+                $bubbleid= $tab->platformRemoteId;
+		$idVm=$this->idVm;
+		$idApi=$this->idApi;
+		$flavor=$this->flavor;
+		$timeout=0;
+		while($this->getVmStatus =! "started" and $timeout < 3600){
+			sleep(5);
+			$timeout=$timeout+5;
+		}
+		if($flavor){
+			//STOP
+			$this->stopVM($idBubble,$idVm);	
+			//CHANGE FLAVOR
+			$this->changeFlavor($idBubble,$idVm,$flavor);
+			//START
+			$this->startVM($idBubble,$idVm);
+			
+		}
+		return $this->updateVmInfos($bubbleid,$idVm,$idApi);
+		
+		
+	}
+	public function changeFlavor($idBubble,$idVm,$flavor){
+		$flavors=array("SP"=>"NWYxMTg0MGMtYWU1NS00Yzk0LWE5YmUtMTBhMjkxYmExNGQyLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==","MP"=>"YjVjNTVhZjAtZTg2Mi00NDhlLWI5Y2QtNWJiMzg1ODkxNzgxLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==","LP"=>"ZjMxZDJhMTgtYTI2OS00NzM1LWE5NDctMWIxNWZlNjc3MDBjLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==");
+		$idFlavor=$flavors[$flavor];
+		$url=$this->base_url."/rest/projects/".$idBubble."/instances/".$idVm;
+                $json=$this->Call($url,"PUT","json","{flavorid:$idFlavor}",true);
+                $tabjson= json_decode($json);
+                return $tabjson;
+	}
+	public function stopVM($idBubble,$idVm){
+		$url=$this->base_url."/rest/projects/".$idBubble."/instances/".$idVm."/stop";
+                $json=$this->Call($url,"PUT","","",true);
+                $tabjson= json_decode($json);
+                return $tabjson;
+	}
+	public function startVM($idBubble,$idVm){
+                $url=$this->base_url."/rest/projects/".$idBubble."/instances/".$idVm."/start";
+                $json=$this->Call($url,"PUT","json","",true);
+                $tabjson= json_decode($json);
+                return $tabjson;
+        }
 	private function createVM($name,$bubble,$adminPass="password"){
         	$image="MzA4OTJmNDItMWJhZi00MWZkLTg5MTItMDY1OWIwYTBmNTljLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==";
         	$call = new CallPortail();
@@ -166,99 +215,26 @@ class CallPortail{
 		}
 		
 	}
-	public function updateVmInfos($idBubble,$idVm,$idApi){
-                //$return=array();
-                $url=$this->base_url."/rest/projects/".$idBubble."/instances/".$idVm;
-		//ex:http://portal.axa-cloud.com/rest/projects/4/instances/NjE2NjRjZjAtYzMzOS00Y2YzLWJkODgtMDY2NjdjZjE2MGZjLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==/
-                //rl="http://portal.axa-cloud.com/rest/projects/4/instances/MjhjOWNhODYtZjUyYi00ODdmLThhNmItMDZiM2UzZTkzYWRkLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==";
-		$json=$this->Call($url,"GET","","",true);
+	public function getVmStatus($idBubble,$idVm){
+		$infos=$this->getVmInfos($idBubble,$idVm);
+		return $infos->status;
+	}
+	/**
+	*/
+	public function getVmInfos($idBubble,$idVm){
+		$url=$this->base_url."/rest/projects/".$idBubble."/instances/".$idVm;
+                $json=$this->Call($url,"GET","","",true);
                 $tabjson= json_decode($json);
-         /*       var_dump($tabjson);
-	 	$message='{
-
-    "accessIPv4": null,
-    "accessIPv6": null,
-    "addresses": [
-        {
-            "dnsName": null,
-            "ipAddress": null,
-            "ipVersion": null,
-            "macAddress": "00:15:5D:04:CC:24",
-            "network": null,
-            "providerId": "9745746c-ac9e-4101-9aa8-62c921ad91b9/2ff45fbd-4289-4a5f-af62-c1cc8a2054c4",
-            "type": null
-        }
-    ],
-    "availabilityZone": null,
-    "created": "2014-05-05T17:52:10Z",
-    "fault": [
-        {
-            "code": "DeleteCheckpoint",
-            "completed": true,
-            "created": "2014-09-24T19:41:24Z",
-            "details": "",
-            "error": false,
-            "message": "Remove checkpoint",
-            "progressValue": "100",
-            "username": null
-        },
-        {
-            "code": "DeleteCheckpoint",
-            "completed": true,
-            "created": "2014-09-24T19:38:05Z",
-            "details": "",
-            "error": false,
-            "message": "Remove checkpoint",
-            "progressValue": "100",
-            "username": null
-        }
-    ],
-    "flavor": {
-        "disk": "45860503552",
-        "name": "2 CPU / 4.00 Gb RAM",
-        "providerId": null,
-        "ram": 4096,
-        "swap": null,
-        "vcpus": "2"
-    },
-    "generation": 1,
-    "host": null,
-    "image": {
-        "created": null,
-        "description": "Red Hat Enterprise Linux 6 (64 bit)",
-        "metadata": null,
-        "minDisk": null,
-        "minRam": null,
-        "name": "Red Hat Enterprise Linux 6 (64 bit)",
-        "osType": "Linux",
-        "progress": null,
-        "providerId": null,
-        "size": null,
-        "status": null,
-        "updated": null
-    },
-    "instanceName": "CLOUDX0XSL8ELAE",
-    "keyName": null,
-    "metadata": null,
-    "name": "EURREWEBRHEL001",
-    "progress": null,
-    "providerId": "NjE2NjRjZjAtYzMzOS00Y2YzLWJkODgtMDY2NjdjZjE2MGZjLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==",
-    "securityGroups": null,
-    "state": "Running",
-    "status": "running",
-    "updated": "2014-09-25T03:26:25Z"
-
-}';	
-	$tabjson= json_decode($message);*/
-	//echo "Update Infos";
-	//var_dump($tabjson);
-	sleep(1);
-	//die;
-	$tabforapi=array("id"=>$idApi,"VMRemoteId"=>$tabjson->providerId,"name"=>$tabjson->name,"instanceName"=>$tabjson->instanceName,"ip"=>$tabjson->accessIPv4,"state"=>$tabjson->state,"status"=>$tabjson->status);
-	//var_dump(json_encode($tabforapi));
-	$jsonsend=json_encode($tabforapi);
-	$this->CallApi("http://api.local/rest/vm/".$idApi,$jsonsend);
-	return true;	
+		return $tabjson;
+	}
+	/**
+	*/
+	public function updateVmInfos($idBubble,$idVm,$idApi){
+                $tabjson=$this->getVmInfos($idBubble,$idVm); 
+		$tabforapi=array("id"=>$idApi,"VMRemoteId"=>$tabjson->providerId,"name"=>$tabjson->name,"instanceName"=>$tabjson->instanceName,"ip"=>$tabjson->accessIPv4,"state"=>$tabjson->state,"status"=>$tabjson->status);
+		$jsonsend=json_encode($tabforapi);
+		$this->CallApi("http://api.local/rest/vm/".$idApi,$jsonsend);
+		return true;	
 	}
 
 }

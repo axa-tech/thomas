@@ -1,0 +1,324 @@
+Load Sucess 
+ [*] Waiting for messages. To exit press CTRL+C
+ [x] Received {"platformId":7,"platformRemoteId":"9","vms":[{"id":13,"adminPass":"defaultAdminPass","name":"the vm name","cpu":4,"memory":8,"storage":20},{"id":15,"adminPass":"defaultAdminPass","name":"the vm name","cpu":4,"memory":8,"storage":20}]}
+ [x] Done
+CALL http://portal.axa-cloud.com/rest/projects/9 GET :  :  array(23) {
+  ["url"]=>
+  string(43) "http://portal.axa-cloud.com/rest/projects/9"
+  ["content_type"]=>
+  string(30) "application/json;charset=UTF-8"
+  ["http_code"]=>
+  int(200)
+  ["header_size"]=>
+  int(401)
+  ["request_size"]=>
+  int(263)
+  ["filetime"]=>
+  int(-1)
+  ["ssl_verify_result"]=>
+  int(0)
+  ["redirect_count"]=>
+  int(0)
+  ["total_time"]=>
+  float(0.018479)
+  ["namelookup_time"]=>
+  float(0.001497)
+  ["connect_time"]=>
+  float(0.002557)
+  ["pretransfer_time"]=>
+  float(0.002563)
+  ["size_upload"]=>
+  float(0)
+  ["size_download"]=>
+  float(585)
+  ["speed_download"]=>
+  float(31657)
+  ["speed_upload"]=>
+  float(0)
+  ["download_content_length"]=>
+  float(-1)
+  ["upload_content_length"]=>
+  float(0)
+  ["starttransfer_time"]=>
+  float(0.018446)
+  ["redirect_time"]=>
+  float(0)
+  ["redirect_url"]=>
+  string(0) ""
+  ["primary_ip"]=>
+  string(13) "10.225.23.242"
+  ["certinfo"]=>
+  array(0) {
+  }
+}
+string(585) "{"id":9,"name":"Europe-AZ1-AnteProd","type":"WAP","endPoint":"https://eurfmwap001c.cloudfabric.intraxa:30005","connectionJumpHostId":null,"masterKeypairName":null,"users":[{"id":34,"username":"lamp.project@axa-tech.com","fullName":"lamp.project@axa-tech.com","role":"CO-ADMIN"},{"id":24,"username":"roger.charmont.ats@axa-b2e.intraxa","fullName":"Roger Charmont","role":"CO-ADMIN"},{"id":13,"username":"yann.meguira.ats@axa-b2e.intraxa","fullName":"Yann MEGUIRA","role":"CO-ADMIN"},{"id":3,"username":"guillaume.nadot.ats@axa-b2e.intraxa","fullName":"Guillaume Nadot","role":"ADMIN"}]}"
+CALL http://portal.axa-cloud.com/rest/projects/9/flavors GET :  :  array(23) {
+  ["url"]=>
+  string(51) "http://portal.axa-cloud.com/rest/projects/9/flavors"
+  ["content_type"]=>
+  string(30) "application/json;charset=UTF-8"
+  ["http_code"]=>
+  int(200)
+  ["header_size"]=>
+  int(401)
+  ["request_size"]=>
+  int(271)
+  ["filetime"]=>
+  int(-1)
+  ["ssl_verify_result"]=>
+  int(0)
+  ["redirect_count"]=>
+  int(0)
+  ["total_time"]=>
+  float(0.138457)
+  ["namelookup_time"]=>
+  float(1.5E-5)
+  ["connect_time"]=>
+  float(0.000805)
+  ["pretransfer_time"]=>
+  float(0.000809)
+  ["size_upload"]=>
+  float(0)
+  ["size_download"]=>
+  float(105)
+  ["speed_download"]=>
+  float(758)
+  ["speed_upload"]=>
+  float(0)
+  ["download_content_length"]=>
+  float(-1)
+  ["upload_content_length"]=>
+  float(0)
+  ["starttransfer_time"]=>
+  float(0.138113)
+  ["redirect_time"]=>
+  float(0)
+  ["redirect_url"]=>
+  string(0) ""
+  ["primary_ip"]=>
+  string(13) "10.225.23.242"
+  ["certinfo"]=>
+  array(0) {
+  }
+}
+string(105) "[{"disk":null,"name":"2 CPU / 4.00 Gb RAM","providerId":"NDA5Ni8y","ram":4096.0,"swap":null,"vcpus":"2"}]"
+CALL http://portal.axa-cloud.com/rest/projects/9/images GET :  :  array(23) {
+  ["url"]=>
+  string(50) "http://portal.axa-cloud.com/rest/projects/9/images"
+  ["content_type"]=>
+  string(30) "application/json;charset=UTF-8"
+  ["http_code"]=>
+  int(200)
+  ["header_size"]=>
+  int(401)
+  ["request_size"]=>
+  int(270)
+  ["filetime"]=>
+  int(-1)
+  ["ssl_verify_result"]=>
+  int(0)
+  ["redirect_count"]=>
+  int(0)
+  ["total_time"]=>
+  float(0.136856)
+  ["namelookup_time"]=>
+  float(5.0E-5)
+  ["connect_time"]=>
+  float(0.001053)
+  ["pretransfer_time"]=>
+  float(0.001057)
+  ["size_upload"]=>
+  float(0)
+  ["size_download"]=>
+  float(2402)
+  ["speed_download"]=>
+  float(17551)
+  ["speed_upload"]=>
+  float(0)
+  ["download_content_length"]=>
+  float(-1)
+  ["upload_content_length"]=>
+  float(0)
+  ["starttransfer_time"]=>
+  float(0.136551)
+  ["redirect_time"]=>
+  float(0)
+  ["redirect_url"]=>
+  string(0) ""
+  ["primary_ip"]=>
+  string(13) "10.225.23.242"
+  ["certinfo"]=>
+  array(0) {
+  }
+}
+string(2402) "[{"created":null,"description":"Red Hat Enterprise Linux 6 (64 bit)","metadata":null,"minDisk":null,"minRam":null,"name":"AZ1_LINUX_RHEL6.5","osType":"Linux","progress":null,"providerId":"MzA4OTJmNDItMWJhZi00MWZkLTg5MTItMDY1OWIwYTBmNTljLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==","size":null,"status":null,"updated":null},{"created":null,"description":"64-bit edition of Windows Server 2008 R2 Datacenter","metadata":null,"minDisk":null,"minRam":null,"name":"AZ1_W2008_R2_SP1_WEB_SERVER","osType":"Windows","progress":null,"providerId":"MzZkMDljYjctN2FkNy00MDk1LWI5YjEtNDRlNDVkYzQwODgxLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==","size":null,"status":null,"updated":null},{"created":null,"description":"64-bit edition of Windows Server 2008 R2 Datacenter","metadata":null,"minDisk":null,"minRam":null,"name":"AZ1_W2008_R2_SP1_BASIC_SERVER","osType":"Windows","progress":null,"providerId":"ZTMxMTFiMDItMTViMy00ODRiLWFlMjAtN2M5NDdiOThkNDUxLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==","size":null,"status":null,"updated":null},{"created":null,"description":"Red Hat Enterprise Linux 6 (64 bit)","metadata":null,"minDisk":null,"minRam":null,"name":"AZ1_LINUX_RHEL_6.5_LAMP","osType":"Linux","progress":null,"providerId":"NzY5NjcxYjYtZDUwYy00MWMzLWI3ZmQtYWUwZGNlY2UzNTQ1LzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==","size":null,"status":null,"updated":null},{"created":null,"description":"Windows Server 2012 R2 Datacenter","metadata":null,"minDisk":null,"minRam":null,"name":"AZ1_W2012_R2_SQL_SERVER","osType":"Windows","progress":null,"providerId":"YTE4OWNjYTktYTE0YS00YzU4LTljNzUtYjVjZGY5MTM4MzZmLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==","size":null,"status":null,"updated":null},{"created":null,"description":"Windows Server 2012 R2 Datacenter","metadata":null,"minDisk":null,"minRam":null,"name":"AZ1_W2012_R2_WEB_SERVER","osType":"Windows","progress":null,"providerId":"NWIxNDRlM2UtNGYxNi00ODNkLThkNTEtY2IzYzIzMzg5NjgzLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==","size":null,"status":null,"updated":null},{"created":null,"description":"Windows Server 2012 R2 Datacenter","metadata":null,"minDisk":null,"minRam":null,"name":"AZ1_W2012_R2_BASIC_SERVER","osType":"Windows","progress":null,"providerId":"OWJkOTU1NjAtYzUwOS00NzQxLTkwM2YtZTc0ODFhZmQzOTBkLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==","size":null,"status":null,"updated":null}]"
+CALL http://portal.axa-cloud.com/rest/projects/9/networks GET :  :  array(23) {
+  ["url"]=>
+  string(52) "http://portal.axa-cloud.com/rest/projects/9/networks"
+  ["content_type"]=>
+  string(30) "application/json;charset=UTF-8"
+  ["http_code"]=>
+  int(200)
+  ["header_size"]=>
+  int(401)
+  ["request_size"]=>
+  int(272)
+  ["filetime"]=>
+  int(-1)
+  ["ssl_verify_result"]=>
+  int(0)
+  ["redirect_count"]=>
+  int(0)
+  ["total_time"]=>
+  float(0.149594)
+  ["namelookup_time"]=>
+  float(2.2E-5)
+  ["connect_time"]=>
+  float(0.000944)
+  ["pretransfer_time"]=>
+  float(0.000947)
+  ["size_upload"]=>
+  float(0)
+  ["size_download"]=>
+  float(636)
+  ["speed_download"]=>
+  float(4251)
+  ["speed_upload"]=>
+  float(0)
+  ["download_content_length"]=>
+  float(-1)
+  ["upload_content_length"]=>
+  float(0)
+  ["starttransfer_time"]=>
+  float(0.14955)
+  ["redirect_time"]=>
+  float(0)
+  ["redirect_url"]=>
+  string(0) ""
+  ["primary_ip"]=>
+  string(13) "10.225.23.242"
+  ["certinfo"]=>
+  array(0) {
+  }
+}
+string(636) "[{"name":"guillaume.nadot.ats@axa-b2e.intraxa_net_f1010688-511f-452e-8adb","netType":"EUR-FA-LNET002","providerId":"ZmI2M2JjM2ItYjgwNi00ODM5LThjMTYtOWU3OWNlMmM3NzhiLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==","shared":null,"status":"true","subnets":[{"availabilityZone":null,"cidr":"10.226.0.128/25","description":"10.226.0.128 (10.226.0.128/25)","dnsNames":null,"enableDHCP":null,"gw":null,"hostRoutes":null,"name":"10.226.0.128","pools":[{"end":"10.226.0.254","start":"10.226.0.129"}],"privateSubnet":null,"providerId":"MGRlYTE2ZGEtYTMwOS00YmQ5LTg0NTQtNjMyZjgwNjU3MDUxLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA=="}]}]"
+CALL http://portal.axa-cloud.com/rest/projects/9/environments GET :  :  array(23) {
+  ["url"]=>
+  string(56) "http://portal.axa-cloud.com/rest/projects/9/environments"
+  ["content_type"]=>
+  string(30) "application/json;charset=UTF-8"
+  ["http_code"]=>
+  int(200)
+  ["header_size"]=>
+  int(401)
+  ["request_size"]=>
+  int(276)
+  ["filetime"]=>
+  int(-1)
+  ["ssl_verify_result"]=>
+  int(0)
+  ["redirect_count"]=>
+  int(0)
+  ["total_time"]=>
+  float(0.076814)
+  ["namelookup_time"]=>
+  float(1.7E-5)
+  ["connect_time"]=>
+  float(0.001033)
+  ["pretransfer_time"]=>
+  float(0.001037)
+  ["size_upload"]=>
+  float(0)
+  ["size_download"]=>
+  float(209)
+  ["speed_download"]=>
+  float(2720)
+  ["speed_upload"]=>
+  float(0)
+  ["download_content_length"]=>
+  float(-1)
+  ["upload_content_length"]=>
+  float(0)
+  ["starttransfer_time"]=>
+  float(0.076538)
+  ["redirect_time"]=>
+  float(0)
+  ["redirect_url"]=>
+  string(0) ""
+  ["primary_ip"]=>
+  string(13) "10.225.23.242"
+  ["certinfo"]=>
+  array(0) {
+  }
+}
+string(209) "[{"description":"Logical Cloud Lognes AnteProd Ressources","name":"Europe - AZ1 - AnteProd","providerId":"MWJlODdhZDQtNWUxYi00OTZmLTg1NTYtNjg2NWYxNzcxYWU1LzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA=="}]"
+array(8) {
+  ["type"]=>
+  string(3) "WAP"
+  ["name"]=>
+  string(11) "the vm name"
+  ["networks"]=>
+  string(100) "ZmI2M2JjM2ItYjgwNi00ODM5LThjMTYtOWU3OWNlMmM3NzhiLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA=="
+  ["flavor"]=>
+  string(8) "NDA5Ni8y"
+  ["image"]=>
+  string(100) "MzA4OTJmNDItMWJhZi00MWZkLTg5MTItMDY1OWIwYTBmNTljLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA=="
+  ["adminPass"]=>
+  string(16) "defaultAdminPass"
+  ["environmentId"]=>
+  string(100) "MWJlODdhZDQtNWUxYi00OTZmLTg1NTYtNjg2NWYxNzcxYWU1LzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA=="
+  ["subnetId"]=>
+  string(100) "MGRlYTE2ZGEtYTMwOS00YmQ5LTg0NTQtNjMyZjgwNjU3MDUxLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA=="
+}
+CALL  POST : json : {"type":"WAP","name":"the vm name","networks":"ZmI2M2JjM2ItYjgwNi00ODM5LThjMTYtOWU3OWNlMmM3NzhiLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==","flavor":"NDA5Ni8y","image":"MzA4OTJmNDItMWJhZi00MWZkLTg5MTItMDY1OWIwYTBmNTljLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==","adminPass":"defaultAdminPass","environmentId":"MWJlODdhZDQtNWUxYi00OTZmLTg1NTYtNjg2NWYxNzcxYWU1LzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA==","subnetId":"MGRlYTE2ZGEtYTMwOS00YmQ5LTg0NTQtNjMyZjgwNjU3MDUxLzJmZjQ1ZmJkLTQyODktNGE1Zi1hZjYyLWMxY2M4YTIwNTRjNA=="} array(23) {
+  ["url"]=>
+  string(0) ""
+  ["content_type"]=>
+  NULL
+  ["http_code"]=>
+  int(0)
+  ["header_size"]=>
+  int(0)
+  ["request_size"]=>
+  int(0)
+  ["filetime"]=>
+  int(-1)
+  ["ssl_verify_result"]=>
+  int(0)
+  ["redirect_count"]=>
+  int(0)
+  ["total_time"]=>
+  float(0)
+  ["namelookup_time"]=>
+  float(0)
+  ["connect_time"]=>
+  float(0)
+  ["pretransfer_time"]=>
+  float(0)
+  ["size_upload"]=>
+  float(0)
+  ["size_download"]=>
+  float(0)
+  ["speed_download"]=>
+  float(0)
+  ["speed_upload"]=>
+  float(0)
+  ["download_content_length"]=>
+  float(-1)
+  ["upload_content_length"]=>
+  float(-1)
+  ["starttransfer_time"]=>
+  float(0)
+  ["redirect_time"]=>
+  float(0)
+  ["redirect_url"]=>
+  string(0) ""
+  ["primary_ip"]=>
+  string(0) ""
+  ["certinfo"]=>
+  array(0) {
+  }
+}
+bool(false)
+bool(false)
+VM OK 

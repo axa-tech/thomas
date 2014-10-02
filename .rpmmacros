@@ -1,0 +1,2 @@
+%_topdir   %(echo /home/thomas)/rpmbuild
+%_tmppath  %{_topdir}/tmp
